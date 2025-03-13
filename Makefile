@@ -28,10 +28,3 @@ logs:
 shell:
 	docker-compose exec web sh
 
-# Aplicar migrações no banco de dados
-migrate:
-	docker-compose exec web python manage.py migrate --noinput
-
-# Criar um superusuário no Django
-createsuperuser:
-	docker-compose exec web python manage.py createsuperuser
