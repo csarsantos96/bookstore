@@ -4,7 +4,9 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY: use a variável de ambiente; se não estiver definida, caia em um valor padrão (não recomendado para produção)
-SECRET_KEY = os.environ.get("SECRET_KEY", "django-insecure-bn)1n*f1))g5xjh8_!j33k#8m3wfd_x!xz!9lg+*mi6a4zdhhu")
+SECRET_KEY = os.environ.get(
+    "SECRET_KEY", "django-insecure-bn)1n*f1))g5xjh8_!j33k#8m3wfd_x!xz!9lg+*mi6a4zdhhu"
+)
 
 # DEBUG: converte a variável de ambiente para booleano; por padrão, True (ajuste conforme necessário)
 DEBUG = bool(int(os.environ.get("DEBUG", 1)))
