@@ -1,6 +1,9 @@
-name: Pull Request Checks
+name: Build and Test
 
 on:
+  push:
+    branches:
+      - main
   pull_request:
     branches:
       - main
@@ -8,6 +11,7 @@ on:
 jobs:
   build_and_test:
     runs-on: ubuntu-latest
+
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
@@ -24,8 +28,10 @@ jobs:
 
       - name: Install dependencies
         run: poetry install
-
+        
       - name: Run tests
+        env:
+          DJANGO_SETTINGS_MODULE: "bookstore.settings"
         run: poetry run pytest
 
       - name: Run Flake8 lint
