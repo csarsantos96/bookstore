@@ -15,7 +15,7 @@ DEBUG = bool(int(os.environ.get("DEBUG", 1)))
 
 # ALLOWED_HOSTS: transforma a string em lista (se o valor não existir, retorna lista vazia)
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "testserver,127.0.0.1,localhost").split(",")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "testserver,127.0.0.1,localhost, bookstor-api-0ec4af25d02e.herokuapp.com").split(",")
 
 
 INSTALLED_APPS = [
@@ -66,6 +66,11 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 # Configuração do banco de dados utilizando variáveis de ambiente
 DATABASES = {
     "default": {
@@ -109,7 +114,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
+
 
 # Configuração para WhiteNoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
