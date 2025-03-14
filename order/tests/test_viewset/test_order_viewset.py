@@ -25,4 +25,3 @@ class TestOrderViewSet(APITestCase):
         data = {"user": self.user.id, "total": 150.0}
         response = self.client.post(url, data)
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
-
