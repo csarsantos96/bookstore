@@ -17,7 +17,7 @@ DEBUG = bool(int(os.environ.get("DEBUG", 1)))
 
 ALLOWED_HOSTS = os.environ.get(
     "DJANGO_ALLOWED_HOSTS",
-    "testserver,127.0.0.1,localhost,bookstor-api.herokuapp.com"
+    "127.0.0.1,localhost,bookstor-api-0ec4af25d02e.herokuapp.com"
 ).split(",")
 
 
