@@ -11,7 +11,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+      DJANGO_SETTINGS_MODULE: bookstore.settings  
     steps:
       - name: Check out repository
         uses: actions/checkout@v3
