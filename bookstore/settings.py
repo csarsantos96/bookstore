@@ -14,7 +14,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = bool(int(os.environ.get("DEBUG", 1)))
 
 # ALLOWED_HOSTS: transforma a string em lista (se o valor não existir, retorna lista vazia)
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
+
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "testserver,127.0.0.1,localhost, bookstor-api-0ec4af25d02e.herokuapp.com").split(",")
 
 
