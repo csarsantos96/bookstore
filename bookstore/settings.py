@@ -1,7 +1,9 @@
 import os
 from pathlib import Path
+from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(os.path.join(BASE_DIR, ".env.dev"))
 
 # SECRET_KEY: use a variável de ambiente; se não estiver definida, caia em um valor padrão (não recomendado para produção)
 SECRET_KEY = os.environ.get(
@@ -70,8 +72,12 @@ DATABASES = {
         "PASSWORD": os.environ.get("SQL_PASSWORD", ""),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
+        "TEST": {
+            "NAME": "test_bookstore_db",
+        },
     }
 }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
