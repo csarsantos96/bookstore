@@ -19,3 +19,12 @@ jobs:
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
           heroku_email: 'csar.santos18@gmail.com'
 
+      - name: Instalar Heroku CLI
+        run: |
+          curl https://cli-assets.heroku.com/install.sh | sh
+
+      - name: Executar migrações Django no Heroku
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: |
+          heroku run python manage.py migrate -a ${{ secrets.HEROKU_APP_NAME }}
