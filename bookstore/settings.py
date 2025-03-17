@@ -20,6 +20,9 @@ ALLOWED_HOSTS = os.environ.get(
     "127.0.0.1,localhost,bookstor-api-0ec4af25d02e.herokuapp.com"
 ).split(",")
 
+CSRF_TRUSTED_ORIGINS = (
+    "http://127.0.0.1,https://127.0.0.1,http://localhost,https://localhost,https://bookstor-api-0ec4af25d02e.herokuapp.com"
+).split(",")
 
 INSTALLED_APPS = [
     "django.contrib.admin",
