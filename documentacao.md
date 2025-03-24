@@ -1,3 +1,18 @@
+# Documentação do Dockerfile
+
+Este Dockerfile oferece duas abordagens para instalar as dependências do seu projeto Python: utilizando o **Poetry** ou o **requirements.txt**. A escolha da abordagem é feita através de um argumento de build chamado `BUILD_TOOL`.
+
+## Abordagens
+
+- **Poetry (padrão):**  
+  Se você não passar nenhum argumento, o build assume o valor padrão `poetry` e as dependências serão instaladas a partir dos arquivos `pyproject.toml` e `poetry.lock`.
+
+- **requirements.txt:**  
+  Se você deseja usar o arquivo `requirements.txt` para gerenciar as dependências, passe o argumento `BUILD_TOOL=requirements` durante o build.
+
+## Dockerfile
+
+```dockerfile
 # syntax=docker/dockerfile:1
 # Defina o build tool desejado: "poetry" (padrão) ou "requirements"
 ARG BUILD_TOOL=poetry
