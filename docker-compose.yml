@@ -1,27 +1,30 @@
+
 services:
-  web:
-    build:
-            context: .
-            args:
-              BUILD_TOOL: poetry
-    ports:
-      - "8001:8000"
-    command: tail -f /dev/null
-    depends_on:
-      - db
-    environment:
-      - DATABASE_NAME=bookstore_db
-      - DATABASE_USER=bookstore_user
-      - DATABASE_PASSWORD=bookstore_pass
-      - DATABASE_HOST=db
-      - DATABASE_PORT=5432
-
   db:
-    image: postgres:15-alpine
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
     environment:
-      POSTGRES_DB: bookstore_db
-      POSTGRES_USER: bookstore_user
-      POSTGRES_PASSWORD: bookstore_pass
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=1896
+      - POSTGRES_DB=bookstore_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
 
+  web:
+    build: .
+    command: sh -c "while ! pg_isready -h db -p 5432 -U postgres; do sleep 1; done && python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./env.dev
+    depends_on:
+      db:
+        condition: service_healthy
 volumes:
   postgres_data:
