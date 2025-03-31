@@ -1,11 +1,12 @@
 services:
   web:
-    build: .
-    volumes:
-      - .:/app
+    build:
+            context: .
+            args:
+              BUILD_TOOL: poetry
     ports:
       - "8001:8000"
-    command: python manage.py runserver 0.0.0.0:8000
+    command: tail -f /dev/null
     depends_on:
       - db
     environment:

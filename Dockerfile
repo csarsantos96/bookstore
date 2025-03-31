@@ -27,15 +27,17 @@ RUN apt-get update && \
 
 
 # Se for usar o Poetry, instala-o
-RUN if [ "$BUILD_TOOL" = "poetry" ]; then \
-      curl -sSL https://install.python-poetry.org | python3 -; \
-    fi
+RUN curl -sSL https://install.python-poetry.org | python3 -
+ENV PATH="/opt/poetry/bin:${PATH}"
 
+
+# Se estiver usando o Poetry, copia os arquivos e instala as dependências
 # Se estiver usando o Poetry, copia os arquivos e instala as dependências
 WORKDIR $PYSETUP_PATH
 COPY poetry.lock pyproject.toml ./
 RUN if [ "$BUILD_TOOL" = "poetry" ]; then \
       poetry install --only main; \
+      python -c "import django; print('Django version:', django.get_version())"; \
     fi
 
 # Define o diretório de trabalho da aplicação e copia o código-fonte
