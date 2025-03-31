@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
 
-
-
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECRET_KEY: use a variável de ambiente; se não estiver definida, caia em um valor padrão (não recomendado para produção)
@@ -14,15 +12,7 @@ SECRET_KEY = os.environ.get(
 DEBUG = bool(int(os.environ.get("DEBUG", 1)))
 
 # ALLOWED_HOSTS: transforma a string em lista (se o valor não existir, retorna lista vazia)
-
-ALLOWED_HOSTS = os.environ.get(
-    "DJANGO_ALLOWED_HOSTS",
-    "127.0.0.1,localhost,bookstor-api-0ec4af25d02e.herokuapp.com"
-).split(",")
-
-CSRF_TRUSTED_ORIGINS = (
-    "http://127.0.0.1,https://127.0.0.1,http://localhost,https://localhost,https://bookstor-api-0ec4af25d02e.herokuapp.com"
-).split(",")
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -41,7 +31,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",  # adiciona o middleware do whitenoise para servir arquivos estáticos
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -49,7 +39,6 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
-
 ]
 
 ROOT_URLCONF = "bookstore.urls"
@@ -71,11 +60,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
-
-STATIC_ROOT = BASE_DIR / "staticfiles"
-
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
 
 # Configuração do banco de dados utilizando variáveis de ambiente
 DATABASES = {
@@ -120,7 +104,7 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_URL = "static/"
-
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Configuração para WhiteNoise
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

@@ -1,43 +1,30 @@
 
-networks:
-  bookstore_network:
-    driver: bridge
-
-volumes:
-  postgres_data:
-  app_data:
-
 services:
   db:
     image: postgres:15
-    ports:
-      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data
-    networks:
-      - bookstore_network
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=1896
       - POSTGRES_DB=bookstore_db
-
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U postgres -d bookstore_db"]
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
-      timeout: 3s
+      timeout: 5s
       retries: 5
 
   web:
     build: .
     command: sh -c "while ! pg_isready -h db -p 5432 -U postgres; do sleep 1; done && python manage.py runserver 0.0.0.0:8000"
-    networks:
-      - bookstore_network
     volumes:
-      - app_data:/usr/src/app
+      - .:/usr/src/app
     ports:
       - "8000:8000"
     env_file:
       - ./env.dev
     depends_on:
       db:
-        condition: service_healthy  # Espera até o banco estar pronto
+        condition: service_healthy
+volumes:
+  postgres_data:
