@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<<<<<<< HEAD
 <module version="4">
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />
@@ -7,12 +6,5 @@
   </component>
   <component name="TemplatesService">
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
-=======
-<module type="PYTHON_MODULE" version="4">
-  <component name="NewModuleRootManager">
-    <content url="file://$MODULE_DIR$" />
-    <orderEntry type="jdk" jdkName="Python 3.12" jdkType="Python SDK" />
-    <orderEntry type="sourceFolder" forTests="false" />
->>>>>>> 091865c1af92c9b4db53fc08df3a6dc67690612c
   </component>
 </module>

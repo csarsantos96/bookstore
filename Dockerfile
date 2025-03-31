@@ -1,9 +1,11 @@
+
 # syntax=docker/dockerfile:1
 # Defina o build tool desejado: "poetry" (padrão) ou "requirements"
 ARG BUILD_TOOL=poetry
 FROM python:3.10-slim
 
 # Configura variáveis de ambiente
+
 ENV PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     PIP_NO_CACHE_DIR=off \
@@ -17,10 +19,12 @@ ENV PYTHONUNBUFFERED=1 \
 
 ENV PATH="$POETRY_HOME/bin:$PATH"
 
+
 # Atualiza o sistema e instala dependências necessárias
 RUN apt-get update && \
     apt-get install --no-install-recommends -y curl build-essential libpq-dev gcc && \
     rm -rf /var/lib/apt/lists/*
+
 
 # Se for usar o Poetry, instala-o
 RUN if [ "$BUILD_TOOL" = "poetry" ]; then \
