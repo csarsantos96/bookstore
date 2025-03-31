@@ -17,12 +17,9 @@ from dotenv import load_dotenv
 # Mesmo que não estivesse definido na branch feat_docker-image, precisamos de BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-<<<<<<< HEAD
+
 # Carrega as variáveis de ambiente do arquivo env.dev (certifique-se de que ele está na raiz do projeto)
-=======
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
->>>>>>> 533a4db5a60267473706d421f5437b6dcd4847c1
+
 load_dotenv(BASE_DIR / "env.dev")
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -34,14 +31,10 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG", "0")))
 
-<<<<<<< HEAD
+
 # 'DJANGO_ALLOWED_HOSTS' deve ser uma string com os hosts separados por espaço.
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1 [::1]").split()
-=======
-# Obter ALLOWED_HOSTS a partir da variável de ambiente.
-# Exemplo de configuração: DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1"
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
->>>>>>> 533a4db5a60267473706d421f5437b6dcd4847c1
+
 
 # Configuração interna (útil, por exemplo, para o debug toolbar)
 INTERNAL_IPS = [
