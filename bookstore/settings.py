@@ -14,10 +14,15 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# Mesmo que não estivesse definido na branch feat_docker-image, precisamos de BASE_DIR
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+<<<<<<< HEAD
 # Carrega as variáveis de ambiente do arquivo env.dev (certifique-se de que ele está na raiz do projeto)
+=======
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
+>>>>>>> 533a4db5a60267473706d421f5437b6dcd4847c1
 load_dotenv(BASE_DIR / "env.dev")
 
 # SECURITY WARNING: keep the secret key used in production secret!
@@ -29,11 +34,19 @@ SECRET_KEY = os.environ.get(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(int(os.environ.get("DEBUG", "0")))
 
+<<<<<<< HEAD
 # 'DJANGO_ALLOWED_HOSTS' deve ser uma string com os hosts separados por espaço.
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "localhost 127.0.0.1 [::1]").split()
+=======
+# Obter ALLOWED_HOSTS a partir da variável de ambiente.
+# Exemplo de configuração: DJANGO_ALLOWED_HOSTS="localhost 127.0.0.1"
+ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", "").split()
+>>>>>>> 533a4db5a60267473706d421f5437b6dcd4847c1
 
-
-# Application definition
+# Configuração interna (útil, por exemplo, para o debug toolbar)
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -52,6 +65,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -81,8 +95,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "bookstore.wsgi.application"
 
+
 # Database
 # As variáveis de ambiente devem estar definidas com o prefixo SQL_ no arquivo env.dev
+
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql").strip(),
@@ -95,8 +111,10 @@ DATABASES = {
 }
 
 
+
 # Password validation
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
+
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
     {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
@@ -114,12 +132,15 @@ REST_FRAMEWORK = {
     ],
 }
 
+
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
+
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
@@ -132,9 +153,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # Internal IPs para o Debug Toolbar
 INTERNAL_IPS = ["127.0.0.1"]
 
-print("SQL_ENGINE:", repr(os.environ.get("SQL_ENGINE")))
-print("SQL_DATABASE:", repr(os.environ.get("SQL_DATABASE")))
-print("SQL_USER:", repr(os.environ.get("SQL_USER")))
-print("SQL_PASSWORD:", repr(os.environ.get("SQL_PASSWORD")))
-print("SQL_HOST:", repr(os.environ.get("SQL_HOST")))
-print("SQL_PORT:", repr(os.environ.get("SQL_PORT")))
+
+
